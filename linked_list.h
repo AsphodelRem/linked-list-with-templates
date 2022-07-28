@@ -3,18 +3,18 @@
 * 
 * Before including this header you need to define one of macros responsible for using the type.
 * This macros:
-* CHAR_F		- char
-* BYTE_INT_F	- byte/int8_t 
-* UBYTE_INT_F	- unsigned int8_t
-* SHORT_INT_F	- short int
+* CHAR_F		    - char
+* BYTE_INT_F	  - byte/int8_t 
+* UBYTE_INT_F	  - unsigned int8_t
+* SHORT_INT_F	  - short int
 * USHORT_INT_F	- unsigned short int
-* INT_F			- int
-* UINT_F		- unsigned int
-* DOUBLE_F		- double
-* FLOAT_F		- float
-* LONG_INT_F	- long long int
-* ULONG_INT_F	- unsigned long long int
-* SIZE_T_F		- size_t
+* INT_F			    - int
+* UINT_F		    - unsigned int
+* DOUBLE_F		  - double
+* FLOAT_F		    - float
+* LONG_INT_F	  - long long int
+* ULONG_INT_F	  - unsigned long long int
+* SIZE_T_F		  - size_t
 * 
 * In case you want to set multiple lists with different types, 
 * you need to define two macros: NODE_NAME and LIST_NAME. 
