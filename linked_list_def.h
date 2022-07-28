@@ -73,17 +73,17 @@ NODE_TYPE(TYPE, addNodeBefore)(LIST* list, TYPE value, int index)
 	if (index == FIRST_INDEX || index >= list->length) 
 		return NODE_TYPE(TYPE, push_front)(list, value);
 
-	NODE* newNode	= createNode(value);
-	NODE* temp		= (NODE*)malloc(sizeof(NODE));
+	NODE* newNode	= NODE_TYPE(TYPE, createNode)(value);
+	NODE* iter		= (NODE*)malloc(sizeof(NODE));
 
-	temp = LIST_HEAD;
+	iter = LIST_HEAD;
 	for (int id = 0; id < index; id++)
-		temp = temp->next;
+		iter = iter->next;
 
-	newNode->next		= temp;
-	newNode->prev		= temp->prev->next;
-	temp->prev->next	= newNode;
-	temp->prev			= newNode;
+	newNode->next		= iter;
+	newNode->prev		= iter->prev;
+	iter->prev->next	= newNode;
+	iter->prev			= newNode;
 	list->length++;
 
 	return LIST_SUCCESS;
@@ -97,16 +97,16 @@ NODE_TYPE(TYPE, addNodeAfter)(LIST* list, TYPE value, int index)
 		return NODE_TYPE(TYPE, push_back)(list, value);
 
 	NODE* newNode = NODE_TYPE(TYPE, createNode)(value);
-	NODE* temp = (NODE*)malloc(sizeof(NODE));
+	NODE* iter = (NODE*)malloc(sizeof(NODE));
 
-	temp = LIST_HEAD;
+	iter = LIST_HEAD;
 	for (int id = 0; id < index; id++)
-		temp = temp->next;
+		iter = iter->next;
 
-	newNode->next = temp->next;
-	newNode->prev = temp;
-	temp->next->prev = newNode;
-	temp->next = newNode;
+	newNode->next		= iter->next;
+	newNode->prev		= iter;
+	iter->next->prev	= newNode;
+	iter->next			= newNode;
 	list->length++;
 
 	return LIST_SUCCESS;
@@ -143,7 +143,7 @@ NODE_TYPE (TYPE, getIndex)(LIST* list, TYPE value)
 }
 
 static inline int
-NODE_TYPE(TYPE, getByIndex)(LIST* list, unsigned int index, void** destination)
+NODE_TYPE(TYPE, getByIndex)(LIST* list, unsigned int index, TYPE* destination)
 {
 	if (!list || index > list->length) return LIST_FAILURE;
 
@@ -204,6 +204,8 @@ NODE_TYPE(TYPE, printList)(LIST* list)
 		printf(FORMAT, (TYPE)iter->value);
 		iter = iter->next;
 	}
+	printf("\n");
+
 	return LIST_SUCCESS;
 }
 
@@ -262,5 +264,33 @@ NODE_TYPE(TYPE, deleteList)(LIST* list)
 	return LIST_SUCCESS;
 }
 
-#undef TYPE
-#undef FORMAT
+#undef	TYPE
+#undef	FORMAT 
+#undef	LIST_NAME
+#undef	NODE_NAME
+
+#ifdef	CHAR_F
+#undef	CHAR_F
+#elif	BYTE_INT_F
+#undef	BYTE_INT_F
+#elif	UBYTE_INT_F
+#undef	BYTE_INT_F
+#elif	INT_F
+#undef	INT_F
+#elif	UINT_F
+#undef	UINT_F
+#elif	SHORT_INT_F
+#undef	SHORT_INT_F
+#elif	USHORT_INT_F
+#undef	USHORT_INT_F
+#elif	DOUBLE_F
+#undef	DOUBLE_F
+#elif	FLOAT_F
+#undef	FLOAT_F
+#elif	LONG_INT_F
+#undef	LONG_INT_F
+#elif	ULONG_INT_F
+#undef	ULONG_INT_F
+#elif	SIZE_T_F
+#undef	SIZE_T_F
+#endif
