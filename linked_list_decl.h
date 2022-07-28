@@ -1,18 +1,12 @@
-/*
-Simple doubly list with c-templates.
-*/
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
 
-#define SET_LIST_TYPE
-
 #define LIST_FAILURE	0
 #define LIST_SUCCESS	1
 
-#define LAST_INDEX		list->length - 1
 #define FIRST_INDEX		0
+#define LAST_INDEX		list->length - 1
 #define LIST_HEAD		list->head
 #define LIST_TAIL		list->tail
 
@@ -20,56 +14,54 @@ Simple doubly list with c-templates.
 #define NO_ITEM			0
 #define ITEM_IN_LIST	1
 
+#define SET_THIS_TYPE	1
+
 #ifdef CHAR_F
-#define FORMAT "%c "
-#define TYPE char 
-
-#elif INT_F
-#define FORMAT "%d "
-#define TYPE int32_t 
-
-#elif UINT_F
-#define FORMAT "%u "
-#define TYPE uint32_t
-
+	#define FORMAT "%c\n"
+	#define TYPE char 
+#elif BYTE_INT_F
+	#define FORMAT "%c\n"
+	#define TYPE int8_t
+#elif UBYTE_INT_F
+	#define FORMAT "%hu\n"
+	#define TYPE uint8_t
 #elif SHORT_INT_F
-#define FORMAT "%h "
-#define TYPE int16_t
-
+	#define FORMAT "%hd\n"
+	#define TYPE int16_t
 #elif USHORT_INT_F
-#define FORMAT "%h "
-#define TYPE uint16_t
-
+	#define FORMAT "%hu\n"
+	#define TYPE uint16_t
+#elif INT_F
+	#define FORMAT "%d\n"
+	#define TYPE int32_t 
+#elif UINT_F
+	#define FORMAT "%u\n"
+	#define TYPE uint32_t
+#elif LONG_INT_F
+	#define FORMAT "%lld\n"
+	#define TYPE int64_t
+#elif ULONG_INT_F
+	#define FORMAT "%llu\n"
+	#define TYPE uint64_t
 #elif DOUBLE_F
-#define FORMAT "%lf "
-#define TYPE double 
-
+	#define FORMAT "%lf\n"
+	#define TYPE double 
 #elif FLOAT_F
-#define FORMAT "%lf "
-#define TYPE float
-
-#elif LL_INT
-#define FORMAT "%ll "
-#define TYPE int64_t
-
-#elif ULL_INT
-#define FORMAT "%llu "
-#define TYPE uint64_t
-
+	#define FORMAT "%f\n"
+	#define TYPE float
 #elif SIZE_T_F
-#define FORMAT "%u "
-#define TYPE size_t
+	#define FORMAT "%u\n"
+	#define TYPE size_t
 #endif
 
-
 #ifndef LIST_TYPE
-#define LIST_TEMP(type, function_name) type##_##function_name
-#define LIST_TYPE(type, function_name) LIST_TEMP(type, function_name)
+	#define LIST_TEMP(type, function_name) type##_##function_name
+	#define LIST_TYPE(type, function_name) LIST_TEMP(type, function_name)
 #endif
 
 #ifndef NODE_TYPE
-#define NODE_TEMP(type, function_name) type##_##function_name
-#define NODE_TYPE(type, function_name) NODE_TEMP(type, function_name)
+	#define NODE_TEMP(type, function_name) type##_##function_name
+	#define NODE_TYPE(type, function_name) NODE_TEMP(type, function_name)
 #endif
 
 #define LIST LIST_NAME
@@ -82,7 +74,7 @@ typedef struct NODE {
 } NODE;
 
 typedef struct LIST {
-	TYPE length;
+	uint64_t length;
 	NODE* head;
 	NODE* tail;
 } LIST;
@@ -112,7 +104,7 @@ static inline int
 NODE_TYPE(TYPE, searchValue)(LIST* list, TYPE value);
 
 static inline int
-NODE_TYPE(TYPE, getByIndex)(LIST* list, unsigned int index, void** destination);
+NODE_TYPE(TYPE, getByIndex)(LIST* list, unsigned int index, TYPE* destination);
 
 static inline int
 NODE_TYPE(TYPE, printNodes)(NODE* node);
