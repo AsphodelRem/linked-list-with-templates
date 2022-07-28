@@ -27,5 +27,5 @@
 * 
 */
 
-#include "linked_list_decl.h"
-#include "linked_list_def.h"
+#include "inc/linked_list_decl.h"
+#include "inc/linked_list_def.h"
