@@ -71,19 +71,25 @@ typedef struct NODE {
 	struct NODE* next;
 	struct NODE* prev;
 	TYPE value;
+
+	struct NODE* next_big_mode_;
+	struct NODE* prev_big_node_;
 } NODE;
 
 typedef struct LIST {
 	uint64_t length;
 	NODE* head;
 	NODE* tail;
+
+	size_t margin_between_big_nodes_;
+
 } LIST;
 
 static inline LIST*
-LIST_TYPE(TYPE, createList)();
+LIST_TYPE(TYPE, create_list)();
 
 static inline NODE*
-NODE_TYPE(TYPE, createNode)(TYPE value);
+NODE_TYPE(TYPE, create_node)(TYPE value);
 
 static inline int
 NODE_TYPE(TYPE, push_back)(LIST* list, TYPE value);
@@ -92,19 +98,19 @@ static inline int
 NODE_TYPE(TYPE, push_front)(LIST* list, TYPE value);
 
 static inline int
-NODE_TYPE(TYPE, addNodeAfter)(LIST* list, TYPE value, int index);
+NODE_TYPE(TYPE, add_node_after)(LIST* list, TYPE value, int index);
 
 static inline int
-NODE_TYPE(TYPE, addNodeBefore)(LIST* list, TYPE value, int index);
+NODE_TYPE(TYPE, add_node_before)(LIST* list, TYPE value, int index);
 
 static inline unsigned int
-NODE_TYPE(TYPE, getIndex)(LIST* list, TYPE value);
+NODE_TYPE(TYPE, get_index)(LIST* list, TYPE value);
 
 static inline int
-NODE_TYPE(TYPE, searchValue)(LIST* list, TYPE value);
+NODE_TYPE(TYPE, find)(LIST* list, TYPE value);
 
 static inline int
-NODE_TYPE(TYPE, getByIndex)(LIST* list, unsigned int index, TYPE* destination);
+NODE_TYPE(TYPE, get_by_index)(LIST* list, unsigned int index, TYPE* destination);
 
 static inline int
 NODE_TYPE(TYPE, printNodes)(NODE* node);
@@ -113,7 +119,7 @@ static inline int
 NODE_TYPE(TYPE, printList)(LIST* list);
 
 static inline int
-NODE_TYPE(TYPE, deleteNode)(LIST* list, int index);
+NODE_TYPE(TYPE, delete_node)(LIST* list, int index);
 
 static inline int
-NODE_TYPE(TYPE, deleteList)(LIST* list);
+NODE_TYPE(TYPE, delete_list)(LIST* list);

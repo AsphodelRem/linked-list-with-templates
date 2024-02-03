@@ -1,5 +1,5 @@
 static inline LIST*
-LIST_TYPE(TYPE, createList)()
+LIST_TYPE(TYPE, create_list)()
 {
 	LIST* newList = (LIST*)malloc(sizeof(LIST));
 	newList->head	= NULL;
@@ -9,7 +9,7 @@ LIST_TYPE(TYPE, createList)()
 }
 
 static inline NODE*
-NODE_TYPE(TYPE, createNode)(TYPE value)
+NODE_TYPE(TYPE, create_node)(TYPE value)
 {
 	NODE* newNode	= (NODE*)malloc(sizeof(NODE));
 	newNode->next	= NULL;
@@ -24,7 +24,7 @@ NODE_TYPE(TYPE, push_back)(LIST* list, TYPE value)
 {
 	if (!list) return LIST_FAILURE;
 
-	NODE* node = NODE_TYPE(TYPE, createNode)(value);
+	NODE* node = NODE_TYPE(TYPE, create_node)(value);
 
 	if (!list->length)
 	{
@@ -48,7 +48,7 @@ NODE_TYPE (TYPE, push_front)(LIST* list, TYPE value)
 {
 	if (!list)	 return LIST_FAILURE;
 
-	NODE* node = NODE_TYPE(TYPE, createNode)(value);
+	NODE* node = NODE_TYPE(TYPE, create_node)(value);
 	if (!list->length) 
 	{
 		list->head		= node;
@@ -66,14 +66,14 @@ NODE_TYPE (TYPE, push_front)(LIST* list, TYPE value)
 }
 
 static inline int
-NODE_TYPE(TYPE, addNodeBefore)(LIST* list, TYPE value, int index)
+NODE_TYPE(TYPE, add_node_before)(LIST* list, TYPE value, int index)
 {
 	if (!list)	return LIST_FAILURE;
 
 	if (index == FIRST_INDEX || index >= list->length) 
 		return NODE_TYPE(TYPE, push_front)(list, value);
 
-	NODE* newNode	= NODE_TYPE(TYPE, createNode)(value);
+	NODE* newNode	= NODE_TYPE(TYPE, create_node)(value);
 	NODE* iter		= (NODE*)malloc(sizeof(NODE));
 
 	iter = LIST_HEAD;
@@ -90,13 +90,13 @@ NODE_TYPE(TYPE, addNodeBefore)(LIST* list, TYPE value, int index)
 }
 
 static inline int
-NODE_TYPE(TYPE, addNodeAfter)(LIST* list, TYPE value, int index)
+NODE_TYPE(TYPE, add_node_after)(LIST* list, TYPE value, int index)
 {
 	if (!list) return LIST_FAILURE;
 	if (index >= LAST_INDEX)
 		return NODE_TYPE(TYPE, push_back)(list, value);
 
-	NODE* newNode = NODE_TYPE(TYPE, createNode)(value);
+	NODE* newNode = NODE_TYPE(TYPE, create_node)(value);
 	NODE* iter = (NODE*)malloc(sizeof(NODE));
 
 	iter = LIST_HEAD;
@@ -113,7 +113,7 @@ NODE_TYPE(TYPE, addNodeAfter)(LIST* list, TYPE value, int index)
 }
 
 static inline int
-NODE_TYPE(TYPE, searchValue)(LIST* list, TYPE value)
+NODE_TYPE(TYPE, find)(LIST* list, TYPE value)
 {
 	if (!list) return LIST_FAILURE;
 
@@ -128,7 +128,7 @@ NODE_TYPE(TYPE, searchValue)(LIST* list, TYPE value)
 }
 
 static inline unsigned int
-NODE_TYPE (TYPE, getIndex)(LIST* list, TYPE value) 
+NODE_TYPE (TYPE, get_index)(LIST* list, TYPE value)
 {
 	if (!list)   return LIST_FAILURE;
 
@@ -143,7 +143,7 @@ NODE_TYPE (TYPE, getIndex)(LIST* list, TYPE value)
 }
 
 static inline int
-NODE_TYPE(TYPE, getByIndex)(LIST* list, unsigned int index, TYPE* destination)
+NODE_TYPE(TYPE, get_by_index)(LIST* list, unsigned int index, TYPE* destination)
 {
 	if (!list || index > list->length) return LIST_FAILURE;
 
@@ -210,7 +210,7 @@ NODE_TYPE(TYPE, printList)(LIST* list)
 }
 
 static inline int
-NODE_TYPE(TYPE, deleteNode)(LIST* list, int index) 
+NODE_TYPE(TYPE, delete_node)(LIST* list, int index)
 {
 	if (list->length == 0 || index > list->length || !list)	
 		return LIST_FAILURE;
@@ -249,7 +249,7 @@ NODE_TYPE(TYPE, deleteNode)(LIST* list, int index)
 }
 
 static inline int
-NODE_TYPE(TYPE, deleteList)(LIST* list) 
+NODE_TYPE(TYPE, delete_list)(LIST* list)
 {
 	if (!list) return LIST_FAILURE;
 
